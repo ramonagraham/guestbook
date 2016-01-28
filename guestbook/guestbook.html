@@ -3,12 +3,34 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <h1>Welcome to Ramona's Guestbook</h1>
+  
+  {{ >guestBook}}
+ 
 
-  {{> hello}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
+
+  <template name="guestBook">
+    <form>
+    <div class="form-group">
+      <label for="guestName">Name</label>
+      <input type="text class=form-control" name="guestName"><br><br>
+    </div>
+    
+    <div class="form-group">
+      <label for="guestBookMessage">Message</label>
+      <textarea name="guestBookMessage"
+          class="form-control" cols="30" row="3"></textarea>
+    </div>
+    
+    <button type="submit">Post Message</button>
+    
+    <!--  below, this is how to write a foreach loop in spacebars -->
+  </form>
+    
+    {{#each messages}}    
+      <p>{{name}} {{message}} - {{createdOn}} </p>
+    
+    {{/each}}
+  </template>
