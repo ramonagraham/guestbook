@@ -1,36 +1,56 @@
 <head>
-  <title>guestbook</title>
+  <title>Guestbook</title>
 </head>
 
 <body>
-  <h1>Welcome to Ramona's Guestbook</h1>
-  
-  {{ >guestBook}}
- 
-
+  <a href="about.html" class="about">About</a>
 </body>
 
+  <template name="layout">
+    <div class="container">
+      <h1>Welcome to Ramona's Guestbook</h1>
+    
+     {{ >yield  "about"}}
+    </div>
+   
+  </template>
 
   <template name="guestBook">
-    <form>
-    <div class="form-group">
-      <label for="guestName">Name</label>
-      <input type="text class=form-control" name="guestName"><br><br>
+    <div class="container">
+      <form>
+        <p><a href="{{pathFor route='message.show'}}"><strong>
+          {{ name }}</strong>: {{ message }} - {{ createdOn }}</a></p>
+        
+        <div class="form-group">
+          <label for="guestName">Name</label>
+          <input type="text class=form-control" name="guestName"><br><br>
+        </div>
+      
+        <div class="form-group">
+          <label for="guestBookMessage">Message</label>
+          <textarea name="guestBookMessage"
+              class="form-control" cols="30" row="3"></textarea>
+        </div>
+      
+        <button type="submit">Post Message</button>
+      
+        <!--  below, this is how to write a foreach loop in spacebars -->
+      </form>
+      
+      {{#each messages}}    
+        <p>{{name}} {{message}} - {{createdOn}} </p>
+      
+      {{/each}}
     </div>
-    
-    <div class="form-group">
-      <label for="guestBookMessage">Message</label>
-      <textarea name="guestBookMessage"
-          class="form-control" cols="30" row="3"></textarea>
-    </div>
-    
-    <button type="submit">Post Message</button>
-    
-    <!--  below, this is how to write a foreach loop in spacebars -->
-  </form>
-    
-    {{#each messages}}    
-      <p>{{name}} {{message}} - {{createdOn}} </p>
-    
-    {{/each}}
   </template>
+  
+  <template name="about">
+    <p>This is an app created in IT 328 during Winter Quarter 2016 study.
+      You can create and post messages.</p>
+  </template>
+  
+  <template name="message">
+    {{name}}: {{message}}
+  </template>
+
+  

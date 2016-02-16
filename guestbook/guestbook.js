@@ -1,5 +1,27 @@
 Messages = new Mongo.Collection("message");
 
+Router.route('/', function() {
+  this.render('guestBook');
+  //this.layout('layout');
+});
+
+Router.route('/about', function() {
+  this.render('about');
+  //this.layout('layout');
+});
+
+Router.route('/message/:_id', function() {
+  this.render('message', {
+    data: function() {
+      return Messages.findOne({_id: this.params._id});
+    }
+  });
+  this.layout('layout');
+}, {
+  name: 'message.show'
+
+});
+
 if (Meteor.isClient) {
   
   Meteor.subscribe("messages");  // every client created will subscribe to the same database
