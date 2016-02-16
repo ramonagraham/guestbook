@@ -2,15 +2,15 @@ Messages = new Mongo.Collection("message");
 
 Router.route('/', function() {
   this.render('guestBook');
-  //this.layout('layout');
+  this.layout('layout');
 });
 
 Router.route('/about', function() {
   this.render('about');
-  //this.layout('layout');
+  this.layout('layout');
 });
 
-Router.route('/message/:_id', function() {
+Router.route('/messages/:_id', function() {
   this.render('message', {
     data: function() {
       return Messages.findOne({_id: this.params._id});
